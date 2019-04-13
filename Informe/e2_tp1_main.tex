@@ -1,0 +1,29 @@
+\documentclass{article}
+
+% preambulo:
+\input{e2_tp1_preamble.tex}
+
+
+\begin{document}
+
+\newgeometry{} % margenes default para la caratula
+% caratula:
+\input{e2_tp1_caratula.tex}
+
+% indice:
+\tableofcontents
+\newpage
+
+
+% cambio los margenes para el resto del documento
+\newgeometry{left =1.5cm, right=2cm, top=2cm, bottom=2cm}
+
+
+\subfile{e2_tp1_ej1.tex}
+\subfile{e2_tp1_ej2.tex}
+
+
+
+\clearpage
+
+\end{document}

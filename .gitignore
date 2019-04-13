@@ -2,5 +2,9 @@
 *.log
 *.Zip
 *.pyc
-
+*.toc
+*.aux
+*.synctex.gz
+*.gz
+*.out
 
