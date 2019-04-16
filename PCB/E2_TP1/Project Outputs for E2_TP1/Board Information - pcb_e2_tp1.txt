@@ -1,0 +1,17 @@
+Board Information Report
+Filename     : C:\Users\marth\Documents\GitHub\E2_TP1\PCB\E2_TP1\pcb_e2_tp1.PcbDoc
+Date         : 16/4/2019
+Time         : 1:22:59 a. m.
+Time Elapsed : 00:00:00
+
+General
+    Board Size, 100.076mmx50.038mm
+    Components on board, 25
+count : 2
+
+Routing Information
+    Routing completion, 100,00%
+    Connections, 42
+    Connections routed, 42
+    Connections remaining, 0
+count : 4
