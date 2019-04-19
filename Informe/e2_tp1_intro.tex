@@ -37,7 +37,7 @@ De esta manera, cambiando el valor de $R_A$ se puede variar la tensi\'on de sali
 
 \todo[inline]{toda esta secci\'on falta estructurarla bien}
 
-\subsection{Generador}
+\subsection{Generador y detector}
 
 Para obtener el rango establecido en la tabla \ref{table:reqs}, se decidi\'o utilizar un diodo Zener con tensi\'on nominal de 8.2V, de forma tal que con $R_B=47\mathrm{k}\Omega$ y utilizando un preset de 50k$\Omega$ como $R_A$, se puede llegar a los valores de $V_O$ requeridos. Si bien el valor exacto de los componentes no es particularmente relevante en el circuito, se eligieron en este orden de magnitud con el objetivo de que circule por ellos una corriente relativamente peque\~na (de alrededor de $\nicefrac{V_Z}{R_B}\simeq 0.17\mathrm{mA}$), sin introducir el ruido que una resistencia del orden de los megaohms provocar\'ia.
 
@@ -52,8 +52,6 @@ Dicha corriente, as\'i como la corriente de salida, es proporcionada por el par 
 
 Se decidi\'o utilizar dos transistores para el Darlington, en lugar de un integrado, para tener m\'as control sobre el dise\~no del mismo. Por ejemplo, la mayor\'ia de los pares Darlington del pa\~nol de la universidad poseen resistencias entre la base y el emisor de $T_2$, y lo mismo para $T_1$. Sin embargo, con los transistores elegidos (como se ver\'a a continuaci\'on), estas resistencias no ayudan a llevar los $\beta$ a un punto mejor, y por lo tanto se decidi\'o obviarlas.
 
-
-\subsection{Detector}
 
 
 
@@ -92,7 +90,7 @@ Si sobredimensionamos la corriente m\'axima de salida un 10\% (puesto que debemo
 
 \[I_{T_1\, MAX} = 
 \frac{I_{T_2\, MAX}}{\beta_{T_2\,MIN}} \leq
-\frac{1.65\mathrm{A}}{15} = 110mA \]
+\frac{1.65\mathrm{A}}{15} = 110\mathrm{mA} \]
 
 N\'otese que incluso considerando 2A se obtienen valores inferiores a 200mA, y s\'olo con 1.5A se obtiene 100mA, con lo cual podemos decir con confianza que $I_{T_1\, MAX}$ debe ser superior a 100mA. Descartando los que soportan m\'as de 1A, quedan s\'olo el 2N3904 y el BC337. Si bien este \'ultimo cuesta un poco m\'as del doble (0.10U\$D contra 0.04U\$D), se eligi\'o este modelo de todas maneras por los siguientes motivos:
 
@@ -103,9 +101,38 @@ N\'otese que incluso considerando 2A se obtienen valores inferiores a 200mA, y s
 \end{itemize}
 
   
+ \subsection{Amplificador de error}
+
+En esta fuente regulada, el amplificador de error consiste en un opamp, que compara (resta) la tensi\'on de referencia, generada por el Zener, con una fracci\'on de la de salida. A la salida del operacional se tendr\'a la tensi\'on necesaria para minimizar el error. 
+
+Este operacional debe contar con la posibilidad de ser alimentado con $0 - V_{CC}$, en lugar de $\pm V_{CC}$, puesto que se lo alimentar\'a con la tensi\'on de entrada. Debido a limitaciones en la disponibilidad de componentes en el pa\~nol, la \'unica opci\'on disponible que cumpl\'ia con nuestros requisitos fue el LM358. Sin embargo, esto no implica que no sea adecuado para la aplicaci\'on que le daremos: con 100dB de PSRR, y 100dB tambi\'en de ganancia, se adapta perfectamente al uso que le daremos, en el cual la alimentaci\'on no ser\'a necesariamente estable (pues es la entrada) y se requiere la mayor ganancia posible. A su vez, el fabricante asegura que este integrado puede sinkear m\'as de 10mA, con lo cual ser\'a capaz de aceptar toda la corriente de referencia sin quemarse.
 
 
 \subsection{Pre-regulador: fuente de corriente}
+
+La fuente de corriente que se utiliz\'o se observa en la figura ???\todo{esquema de la fuente}. El funcionamiento de la misma es el siguiente: la resistencia $R_5$ permite que se polaricen los diodos en directa, generando en la base de $T_3$ una tensi\'on de $V_{B_3}=V_{I} - 2 V_D \simeq V_{in} - 1.4\mathrm{V}$. Luego, cuando el transistor est\'e correctamente polarizado (lo cual depender\'a de la diferencia entre $V_I$ y $V_O$), en la resistencia $R_6$ caer\'a una tensi\'on de $V_{R_6} = V_I - V_{E_3} = V_I - (V_{B_3} + V_{BE_3}) = V_I - (V_I - 2V_D + V_{BE_3}) = V_D$ si consideramos $V_{BE_3} = V_D$.
+
+Por lo tanto, como la corriente de salida es aproximadamente igual a la de $R_6$ (despreciando $I_{B_3}$), se obtiene:
+\begin{equation}
+	I_{REF} = \frac{0.7V}{R_6}
+\end{equation}
+
+Si sobredimensionamos la corriente m\'axima un 10\% (considerando las aproximaciones que se hicieron, posibles diferencias en las $V_D$ y $V_{BE}$ con los 0.7V te\'oricos, etc), se obtiene:
+\[
+	I_{REF} =
+	 \frac{1.1 \cdot I_{O\, MAX}}
+	 {\beta_{MIN\, 1} \cdot \beta_{MIN\, 2}}		
+	 = \frac{1.1 \cdot 1.5\mathrm{A}}{100 \cdot 15}
+	=1.1\text{mA}
+\]
+
+Por lo tanto, se eligieron los componentes:
+
+\begin{itemize}
+	\item $R_5$ = 10k$\Omega$, con lo cual los diodos se polarizan con una corriente de entre 0.96mA y 1.86mA (dado que la hoja del 1N4148 recomienda 1mA si se quiere 0.7V).
+	\item $R_6$ = 642$\Omega$ (560 $\Omega$ en serie con $82\Omega$), con lo cual se tiene $I_{O\, MAX} \simeq 1.6355$A, que es lo m\'as cercano que se pudo llegar, con valores comerciales, a los 1.65A que se propuso.
+	\item $T_3$ = BC557, un transistor PNP de uso general, que era el m\'as barato (la mitad que el siguiente m\'as barato) y con mayor disponibilidad del pa\~nol de la universidad, y con $I_C = 100$mA y $V_{CE}=45$V es m\'as que suficiente para este uso.
+\end{itemize}
 
 % \subsection{Protecci\'on frente a cortocircuito}
 
