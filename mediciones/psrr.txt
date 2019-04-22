@@ -1,0 +1,7 @@
+pkpk in 1.7V
+pkpk out .4V
+con Iout = 0.56A
+
+pkpk in .144V
+pkpk out .9mV
+con Iout = 0A
