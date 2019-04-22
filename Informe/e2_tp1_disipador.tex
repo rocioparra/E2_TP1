@@ -1,0 +1,118 @@
+\documentclass[e2_tp1_main.tex]{subfiles}
+
+\begin{document}
+\section{Cálculo del disipador}
+\subsection{Introducción}
+
+Cuando uno o varios componentes electrónicos de un circuito por cuestiones
+de diseño deben disipar mucha potencia (traducida en calor al exterior),
+generalmente dichos dispositivos no son capaces de hacerlo sin llegar
+a la propia falla y/o romperse. Es por esto que para estos casos se
+utilizan los llamados disipadores térmicos. Estos disipadores son
+piezas generalmente metálicas que utilizando las leyes de la termodinámicas
+son capaces de extraerle calor al componente y liberarlo al ambiente.
+Existen disipadores de varias formas, tamaños y materiales.
+
+\subsubsection{Fundamento matemático}
+
+Gracias a la física, es posible establecer una analogía entre la ley
+de Ohm para corrientes y la propagación térmica del calor en los distintos
+materiales, de manera tal como podemos observar en la tabla siguiente:
+
+\begin{table}[H]
+
+\begin{centering}
+\begin{tabular}{|c|c|}
+\hline 
+Ley de Ohm & Propagación térmica\tabularnewline
+\hline 
+\hline 
+Intensidad de corriente (I) & Calor (W)\tabularnewline
+\hline 
+Tensión (V) & Temperatura (T)\tabularnewline
+\hline 
+Resistencia (R) & Resistencia Termica (R)\tabularnewline
+\hline 
+$V=I\cdot R$ & $T=W\cdot R$\tabularnewline
+\hline 
+\end{tabular}\caption{Analogía térmica-ley de Ohm.}
+\par\end{centering}
+\end{table}
+
+Siendo el calor expresado en Watts, la temperatura expresada en ºC,
+y la resistencia térmica expresada en ºC/W.
+
+La resistencia térmica, al igual que la resistencia para la ley de
+Ohm, es inherente a cada material en sí, de manera tal de que por
+ejemplo un aislante térmico posee alta resistencia térmica, y un conductor
+térmico perfecto posee baja resistencia térmica.
+
+\subsection{Elección del disipador}
+
+\subsubsection{Cálculo de Potencia máxima disipada }
+
+Correspondiente al análisis que se hizo del circuito en puntos anteriores,
+el transistor de nuestro circuito que mayor potencia va a disipar
+es el transistor $T_{2}$, correspondiente al par dárlington, el cual
+por diseño va a tener que soportar una corriente cercana de aproximadamente
+1.5 A. Haciendo las cuentas pertinentes, notamos que la mayor disipación
+de potencia en el transistor $T_{2}$ ocurre cuando se pone la fuente
+en corto. Sabiendo la corriente que pasa por el transistor, podemos
+sacar la tensión $V_{CE}$ del mismo para obtener su potencia. Para
+una tensión $V_{0}=22\,V$, obtenemos una potencia $P_{T_{2}}=22.88\,W$.
+
+\subsubsection{Elección del disipador}
+
+Una vez conocida la potencia máxima disipada, podemos aplicar la ley
+de propagación térmica vista previamente para así calcular cuál es
+la resistencia térmica que debe tener el transistor. La ecuación pertinente
+se puede observar a continuación:
+\begin{center}
+{\large{}$T_{m\acute{a}x}=T_{a}+P_{max}(\sum R_{\theta i}$)}{\large\par}
+\par\end{center}
+
+Donde $T_{max}$ es la temperatura máxima a la cual el componente
+puede operar, $T_{A}$ es la temperatura ambiente a la cual está expuesto
+el dispositivo, $P_{max}$ es la potencia máxima, y $R_{\theta}$
+es la resistencia térmica (de lo/s componentes que correspondan).
+
+Sabemos por la hoja de datos que el transistor TIP 41 posee una resistencia
+térmica juntura-ambiente es de un valor $R_{\theta ja}=50\,\frac{\text{ºC}}{W}$
+. Sabiendo además que la $T_{max}$ de operación del transistor es
+de 150ºC , y suponiendo una $T_{A}=24\text{ºC}$, la temperatura del
+dispositivo se expresa según la ecuación de arriba como $T=24+24*50=1224\text{º}$
+donde claramente es evidente el uso de un disipador para poder funcionar.
+
+Procedemos entonces a calcular cuánto debe valer la resistencia térmica
+de todo el conjunto para que el transistor no se queme. Para ello,
+despejamos $R_{\theta}$ de la ecuación de arriba, de manera tal de
+que, reemplazando, obtenemos:
+\begin{center}
+{\large{}$\sum R_{\theta}=\frac{T_{max}-T_{A}}{P_{max}}=5.25\,\frac{\text{ºC}}{W}$}{\large\par}
+\par\end{center}
+
+Ahora, con el acoplado del disipador, la $R_{\theta}$ total, está
+compuesta por la resistencia juntura-carcasa del transistor; y las
+resistencias carcasa-sink, sink-ambiente del disipador. Por la hoja
+de datos del transistor, sabemos que la resistencia juntura-carcasa
+es de un valor $R_{\theta jc}=1.67\,\frac{\text{ºC}}{W}$ como máximo,
+ergo debemos buscar un disipador cuyas $R_{\theta cs}+R_{\theta sa}\leq3.847\,\frac{\text{ºC}}{W}$.
+
+Existen disipadores de varios tamaños, formas y materiales distintos,
+por lo que para elegir el correcto, comparamos las resistencias de
+dichos disipadores para así poder elegir el óptimo. En particular,
+el nuestro debe ser para encapsulados TO220, y con un $R_{\theta}$
+relativamente bajo.
+
+Vemos como el modelo del disipador ZD-1, con unas medidas medidas
+de base 58 mm, altura 29mm, espesor del núcleo central 3.5mm, distancia
+entre aletas de 33mm, genera una superficie total de $525.10\,mm^{2}/mm$
+lo que produce un $R_{\theta ca}=3.5\,\text{ºC/W}$, la cual se acopla
+perfecto con nuestro diseño.
+
+Habiendo elegido este modelo, ahora la temperatura final del componente
+va a ser de $T_{m\acute{a}x}=24+22.88\cdot(3.5+1.67)=130.85ºC$
+con lo cual el dispositivo puede operar en todos los rangos posibles
+para los que fueron diseñados.
+
+\end{document}
