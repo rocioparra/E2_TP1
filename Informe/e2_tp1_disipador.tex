@@ -55,12 +55,25 @@ Correspondiente al análisis que se hizo del circuito en puntos anteriores,
 el transistor de nuestro circuito que mayor potencia va a disipar
 es el transistor $T_{2}$, correspondiente al par dárlington, el cual
 por diseño va a tener que soportar una corriente cercana de aproximadamente
-1.5 A. Haciendo las cuentas pertinentes, notamos que la mayor disipación
-de potencia en el transistor $T_{2}$ ocurre cuando se pone la fuente
-en corto. Sabiendo la corriente que pasa por el transistor, podemos
-sacar la tensión $V_{CE}$ del mismo para obtener su potencia. Para
-una tensión $V_{0}=22\,V$, obtenemos una potencia $P_{T_{2}}=22.88\,W$.
+1.5 A. Para hallar la potencia máxima que este transistor disipa,
+primero debemos saber en qué condiciones va a hacerlo. Para ello,
+sabiendo que:
+\begin{center}
+$\begin{cases}
+P_{D_{T2}}=[V_{i}-V_{0}(i_{0})]\cdot i_{o}\, & siendo\,la\,potencia\,que\,disipa\,el\,transistor\,T2\,(1)\\
+i_{0}R_{4}=(V_{0}+i_{0}R_{4})\cdot\frac{R_{3}}{R_{3}+R_{4}}+0.7 & ecuaci\acute{o}n\,de\,FoldBack\,(2)
+\end{cases}$
+\par\end{center}
 
+Debemos de despejar $V_{0}$ de la ecuación de foldback, insertarla
+en la ecuación de la potencia del transistor T2 y derivarla respecto
+a $i_{0}$ para hallar su máximo.
+
+Haciendo las cuentas pertinentes, notamos que la mayor disipación
+de potencia en el transistor $T_{2}$ ocurre cuando se pone la fuente
+en corto, es decir cuando $i_{0}=1.5\,A$. Sobredimencionando $V_{i}=22\,V$,
+reemplazando los valores en la ecuación (1) obtenemos una potencia
+$P_{T_{2}}=22.88\,W$.
 \subsubsection{Elección del disipador}
 
 Una vez conocida la potencia máxima disipada, podemos aplicar la ley
