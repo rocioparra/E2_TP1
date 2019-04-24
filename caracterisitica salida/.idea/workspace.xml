@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8a23b14-ffd0-4d77-8595-0ca71c86fd0d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/carac_salida.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Informe/e2_tp1_ej1.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../Informe/e2_tp1_ej1.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Informe/e2_tp1_ej1.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../Informe/e2_tp1_ej1.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Informe/e2_tp1_main.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../Informe/e2_tp1_main.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Informe/e2_tp1_main.tex" beforeDir="false" afterPath="$PROJECT_DIR$/../Informe/e2_tp1_main.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/carac_salida.py" beforeDir="false" afterPath="$PROJECT_DIR$/carac_salida.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,8 +19,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/carac_salida.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="69" column="41" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
+            <state relative-caret-position="36">
+              <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -53,20 +57,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="caracterisitica salida" type="b2602c69:ProjectViewProjectNode" />
-              <item name="caracterisitica salida" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -126,6 +117,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.50986344" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -165,8 +157,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/carac_salida.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="69" column="41" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
+        <state relative-caret-position="36">
+          <caret line="27" column="43" lean-forward="true" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>

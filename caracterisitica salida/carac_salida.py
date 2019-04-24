@@ -32,7 +32,7 @@ def plot_sim(voreg):
 			vo.append(float(row[1]))
 			io.append(float(row[2]))
 
-	plt.plot(io, vo, "g")
+	plt.plot(io, vo, "go")
 
 
 def plot_calc(voreg):
