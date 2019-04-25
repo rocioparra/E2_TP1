@@ -40,7 +40,7 @@ Por lo tanto, si no queremos que $T_3$ sature, debe cumplirse que:
 	  V_I - V_O > V_{EC_3 SAT} + 2V_D +  V_{BE_1} +  V_{BE_2} -  V_{BE_3}
 \end{equation}
 
-Si asumimos que todas las $V_{BE}$ y $V_D$ son 0.7V, tomando los 0.3V de la hoja de datos del BC557 como $V_{CE_3 SAT}$, se obtiene que $V_I - V_O > 2.4$V. Sin embargo, emp\'iricamente se verifica que todas estas tensiones son inferiores a 0.7V, y por lo tanto el circuito funciona correctamente para diferencias inferiores.
+Si asumimos que todas las $V_{BE}$ y $V_D$ son 0.7V, tomando los 0.3V de la hoja de datos del BC557 como $V_{CE_3 SAT}$, se obtiene que $V_I - V_O > 2.4$V. Esta condici\'on es, entonces, m\'as restrictiva que la polarizaci\'on correcta del par Darlington, y por lo tanto dictar\'a si el circuito regula o no.
 
 Tomando como criterio que el circuito est\'a regulando correctamente si la tensi\'on de salida es un 99\% o m\'as de la que se tiene sin carga, se obtuvieron los datos de la tabla \ref{table:rendimiento}.
 
@@ -72,6 +72,7 @@ En promedio, pues, se obtuvo que:
 	\right.
 \end{equation}
 
+Esto es m\'as de un volt menos de lo que se hab\'ia obtenido anal\'iticamente (1.4V). Esto se debe a que emp\'iricamente se verifica que todas las tensiones de juntura PN en directa que se asumieron como 0.7V son en realidad inferiores, y por lo tanto el circuito funciona correctamente para valores menores de $V_I$.
 
 
 \section{Impedancia de salida}
@@ -146,6 +147,6 @@ $V_{O\,REG}$ (V) & $R_O$ simulada ($\Omega$) & $R_O$ medida ($\Omega$) \\ \hline
 \label{table:rout}
 \end{table}
 
-
+En las mediciones se obtuvieron valores casi cuatro \'ordenes de magnitud mayores a los calculados y simulados. Sin embargo, no habr\'ia sido posible medir valores inferiores, puesto que implicar\'ia medir tensiones de d\'ecimas de milivolt, lo cual no es posible con el instrumental que se tiene disponible. Por lo tanto, interpretamos la impedancia de salida medida como una cota superior y no como un valor representativo.
 
 \end{document}
