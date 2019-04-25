@@ -2,7 +2,49 @@
 
 \begin{document}
 
-\section{una secci\'on}
+\section{Power supply rejection ratio (PSRR)}
+
+El factor de rechazo de a fuente de alimentacíon se utiliza para describir que tan inmune es un circuito electrónico a variaciones en la tensión de entrada y se define de la siguiente manera:
+
+\begin{equation}
+ PSRR(dB) = 20\log_{10}{(\frac{\Delta V_{fuente}}{\Delta V_{output}})} 
+\end{equation}
+
+Acontinuación se analizará dicho factor en la fuente regulada realizada utilizando una fuente de tensión continua de 12V provista con un nivel prominente de ripple($1V_{pp}$) y a su vez variando la carga.
+En las siguientes tablas se puede observar los resultados de las simulaciones y las mediciones.
+
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{lllll}
+\hline
+$R_{load}$ & $V_{in}$ & $Ripple _{in} (V_{pp})$ & $Ripple_{out} (V_{pp})$ & $PSRR(dB)$ \\ \hline
+$\infty$ & 12 & 1 & 0.0024 & 52,177 \\
+$21\Omega$ & 12 & 1 & 0.3527 & 9,051891
+\end{tabular}
+\caption{valores de PSRR simulados}
+\label{table:psrr}
+\end{table}
+
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{lllll}
+\hline
+$R_{load}$ & $V_{in}$ & $Ripple _{in} (V_{pp})$ & $Ripple_{out} (V_{pp})$ & $PSRR(dB)$ \\ \hline
+$\infty$ & 12 & 0.144 & 0.0009 & 44.082 \\
+$21\Omega$ & 12 & 1,7 & 0.4 & 12.56
+\end{tabular}
+\caption{valores de PSRR medidos}
+\label{table:psrr2}
+\end{table}
+
+Como se puede observar los valores del PSRR de las mediciones presentan diferencias considerables  
+que se deben a multiples factores. Uno de estos se debe a que al estar presente esta variación en la tensión de entrada los valores de tensión en los cuales trabajan los diodos y transistores, por lo cual cambian sus puntos de trabajo y polarización de estos ultimos.
+
+
+
+ 
 
 
 \end{document}
