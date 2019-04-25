@@ -85,28 +85,46 @@ Anal\'iticamente, el valor de $R_O$ se obtiene a partir de la impedancia de sali
 	\label{eq:rout}
 \end{equation}
 
-En la ecuaci\'on \ref{eq:rout} resulta muy claro por qu\'e la realimentaci\'on negativa mejora esta caracter\'istica del circuito: en lugar de ver directamente la impedancia de salida del circuito amplificador b\'asico, la carga ve a esta impedancia reducida $1+|T|$ veces.
+En la ecuaci\'on ~\ref{eq:rout} resulta muy claro por qu\'e la realimentaci\'on negativa mejora esta caracter\'istica del circuito: en lugar de ver directamente la impedancia de salida del circuito amplificador b\'asico, la carga ve a esta impedancia reducida $1+|T|$ veces.\\
+El an\'alisis se realizo eligiendo el generados, el amplificador, la re-alimentación de la siguiente manera:
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=0.45\textwidth]{Analisis.jpg}
+   \caption{Elección de etapas}
+   \label{fig:CircuitoEtapas}
+\end{figure} 
+A partir de la figura ~\ref{fig:CircuitoEtapas} podemos observar que la vamos a tener suma de tensión y muestreo de tensión dando una ganancia de re-alimentación $f=\frac{V_1}{V_2}|_{I_1=0}=\frac{R_8}{R_8+R_7}$.
+A continuación calculamos la ganancia a lazo abierto con el siguiente circuito:
+\begin{figure}[H]
+  \centering
+   \includegraphics[width=0.45\textwidth]{AmplificadorBasico.png}
+   \caption{Elección de etapas}
+   \label{fig:AmplificadorBasico}
+\end{figure} 
+En donde reemplazamos el transistor $T_3$ junto sus correspondientes componentes por una fuente de corriente para simplificar el análisis y remplazamos el generador por un $V_g$ de forma tal que nos queda lo observado por la figura ~\ref{fig:AmplificadorBasico}. De la misma podemos observar que la ganancia a lazo abierto nos va a dar como resultado: 
+$$a=\frac{V_2}{V_1}=\frac{(\epsilon{}A_{vol}-V_{D3}-V{BE1}-V{BE2}+I_3R_{out})(Z_2//R_L)(\beta_1+1)(\beta_2+1)}{V_g[R_{out}+(\beta_1+1)(\beta_2+1)(Z_2//R_L)]}$$
+Al cual aproximando $(\epsilon{}A_{vol}-V_{D3}-V{BE1}-V{BE2}+I_3R_{out})(Z_2//R_L)(\beta_1+1)(\beta_2+1)\simeq\epsilon{}A_{vol}$, dado que todas las demás variables son chicas en comparación a $\epsilon{}A_{vol}$ la cual se encuentra multiplicada por la ganancia del amplificador del operacional y $\epsilon$ que tiene mayor valor que el resto. Ademas aproximamos $V_g[R_{out}+(\beta_1+1)(\beta_2+1)(Z_2//R_L)]\simeq(\beta_1+1)(\beta_2+1)(Z_2//R_L)$ dado que $R_{out}$ va a ser despreciable en comparación a $(\beta_1+1)(\beta_2+1)(Z_2//R_L)$ quedando:
+$$a=\frac{\epsilon{}A_{vol}(Z_2//R_L)(\beta_1+1)(\beta_2+1)}{V_g(\beta_1+1)(\beta_2+1)(Z_2//R_L)}=\frac{\epsilon{}A_{vol}}{V_g}$$
+Dado que $\epsilon{}=V_g\frac{R_{ent}}{R_{ent}+Z_1}$ tenemos que el valor final va a ser $a=\frac{A_{vol}R_{ent}}{R_{ent}+Z_1}$.
+Finalmente, dado que $Z_1=R_8//R_7$ y $Z_2=R_8+R_7$ obtenemos que $a\simeq{}A_{vol}$ porque $\frac{R_{ent}}{R_{ent}+Z_1}\simeq1$.
 
-\todo[inline]{un poco de desarrollo matem\'atico sobre esto}
+Para obtener la impedancia de salida calculamos la impedancia de salida dada por los transistores $T_1$ y $T_2$ los cuales están en una configuración DARLINGTON, utilizando el modelo incremental obtenemos $R_{out}=\frac{\frac{r_{\pi1}}{1+\beta_1}+r_{\pi2}}{1+\beta_2}$ y dado que $r_{\pi}=(1+\beta)\frac{V_T}{I_{cq}}$ estas van a variar acorde a la corriente de polarización y la temperatura a la cual se este usando el transistor. 
 
-Se obtiene anal\'iticamente entonces que:
+Finalmente obtuvimos anal\'iticamente que:
 
 \begin{equation}
 	\left\{
 	\begin{aligned}
-	|T| &\simeq ... \\
-	R_{OA} &\simeq ...
+	|T| &\simeq{}A_{vol}\frac{R_8}{R_7+R_8}\simeq{}99,18\,dB\\
+	R_{OA} &\simeq{}R_L//Z_2//Z_{outCascode}
 	\end{aligned}
 	\right.
 \end{equation}
 
-\todo[inline]{completar modT, Roa}
-
-Remiti\'endonos nuevamente a la ecuaci\'on \ref{eq:rout}, resulta entonces que:
-
-\begin{equation}
-	R_O \simeq 4\times 10^{-6}\Omega
-\end{equation}
+Remiti\'endonos nuevamente a la ecuaci\'on \ref{eq:rout}, resulta entonces en el caso típico donde $I_{cq2}=1,5\,A$ y estando a temperatura ambiente, que:
+$$R_O \simeq 379\times 10^{-6}\Omega$$
+En el peor caso donde $R_{OA}\simeq{}Z_2$ tenemos que:
+$$R_O \simeq 557\times 10^{-3}\Omega$$
 
 Para simular y medir este valor, se estudi\'o la regulaci\'on de carga del circuito. Si la impedancia de salida fuese cero, deber\'ia cumplirse que tanto para corriente 0 como para cualquier valor de $I_O$, la tensi\'on de salida es la misma. A medida que $R_O$ aumenta, m\'as cae la tensi\'on a medida que aumenta la corriente. Se decidi\'o pues calcular $R_O$ a partir de:
 
