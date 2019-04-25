@@ -1,0 +1,23 @@
+\documentclass[e2_tp1_main.tex]{subfiles}
+
+\begin{document}
+
+\section{Cálculo analítico de la mínima tensión de entrada}
+Para esta parte, vamos a obtener de manera analítica la mínima relación entre la salida $V_o$ y la entrada $V_{in}$ de nuestro circuito. Partiendo desde la salida, la tensión en el nodo común a las resistencias $R_4$ y $R_7$ es igual a $V_o$. Despreciando la tensión que cae en la resistencia $R_4$, puesto que es muy pequeña, asumimos que en el colector del transistor T2 obtenemos la tensión $V_o$.
+Sabemos por la hoja de datos del fabricante, que para que el transistor T2 no entre en saturación es de $1 V$como máximo para las condiciones de nuestro circuito, por lo que vamos a asumir que el valor de $V_{ce}=1 V$; ahora, al igual que para T2, la hoja de datos del transistor T1 nos indica que  $V_{ce_{sat}}=600mV$ como valor máximo. 
+Ahora, planteando mallas entre los transistores del par darlington, vemos que:
+\begin{center}
+{\large{}$ V_{ce_{T1}}=V_{ce_{T2}}-V_{BE_{on}}$}{\large\par}
+\par\end{center}
+Como $V_{ce_{T1}}=0.6V$,$V_{BE_{on}}=0.7V$ despejando obtenemos que $V_{ce_{T2}}=1.4V$ , valor admisible dentro del rango del transistor T2.
+Finalmente, $V_{in}$ puede expresarse como:
+\begin{center}
+{\large{}$ V_{in}=V_{ce_{T2}}+V_{o}$}{\large\par}
+\par\end{center}
+
+siendo $V_{ce_{T2}}=1.4 V$.
+
+Cabe destacar que los fabricantes proporcionan una $V_{ce_{sat}}$ mínima, por ende, el valor final puede ser mas bajo. Si se tienen en cuenta los valores mínimos, $V_{ce_{T1}}=0.2V$ y $V_{ce_{T2}}=0.1V$, lo que hace que $ V_{in}=0.8V+V_{o}$.
+
+
+\end{document}
