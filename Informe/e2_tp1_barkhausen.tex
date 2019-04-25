@@ -1,0 +1,35 @@
+\documentclass[e2_tp1_main.tex]{subfiles}
+
+\begin{document}
+
+
+\section{Compensaci\'on de ganancia}
+
+Si bien el comportamiento del circuito que m\'as nos interesa es en continua, las m\'ultiples capacidades de juntura y el lazo de realimentaci\'on provocan que la respuesta en frecuencia de este circuito no sea constante. Por lo tanto, surge la necesidad de garantizar que para ninguna frecuencia se cumpla el criterio de Barkhausen, es decir:
+
+\[
+\left\{
+\begin{aligned}
+|T(f)| &= 1 \\
+\phase{T(f)} &= 180^\circ
+\end{aligned}
+\right.
+\]
+
+Una forma de garantizar que esto no ocurra es forzar la existencia de un polo en bajas frecuencias, de forma tal que se llegue a 0dB para frecuencias bajas y controlando que ese salto no sea en simult\'aneo con una fase cercana a $180^\circ$ para que el sistema no oscile
+
+Se procur\'o lograr esto insertando un capacitor entre la salida del amplificador de error y la realimentaci\'on, de forma tal que en altas frecuencias (cuando el capacitor es un cable) la se\~nal se vea atenuada. Al simular con un capacitor de 10nF, se obtuvieron los m\'argenes observados en la tabla \ref{table:barkhausen}.
+
+\begin{table}[htb!]
+\centering
+\begin{tabular}{|c||c|}
+\hline
+Margen de amplitud (dB)   & 12.9 \\ \hline
+Margen de fase ($^\circ$) & 90   \\ \hline
+\end{tabular}
+\caption{M\'argenes de ganancia y amplitud con C=10nF}
+\label{table:barkhausen}
+\end{table}
+
+\end{document}
+

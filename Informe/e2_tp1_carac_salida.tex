@@ -7,7 +7,7 @@
 
 Se realizaron mediciones de la tensi\'on y la corriente de salida para distintos valores de carga, obteni\'endose as\'i las curvas caracter\'isticas del circuito. Las mismas se realizaron para tres tensiones de regulaci\'on distintas: 9V (figura \ref{fig:cs9}), 12V (figura \ref{fig:cs12}) y 15V (figura \ref{fig:cs15}).
 
-\begin{figure}[!htb]
+\begin{figure}[!htp]
 	\centering
 	\includegraphics[width=0.8\textwidth]
 	{curvas_salida/e2_tp1_carac_salida_9V.png}
@@ -15,6 +15,22 @@ Se realizaron mediciones de la tensi\'on y la corriente de salida para distintos
 	\label{fig:cs9}
 \end{figure}
 
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{curvas_salida/e2_tp1_carac_salida_12V.png}
+	\caption{Curva de salida calculada, simulada y medida, con $V_O|_{REG}=12$V}
+	\label{fig:cs12}
+\end{figure}
+
+
+\begin{figure}[!htp]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{curvas_salida/e2_tp1_carac_salida_15V.png}
+	\caption{Curva de salida calculada, simulada y medida, con $V_O|_{REG}=15$V}
+	\label{fig:cs15}
+\end{figure}
 
 
 En las mediciones, se observa que la tensi\'on de corto circuito real fue menor a la simulada, que a su vez fue menor a la calculada. Recordando la expresi\'on de esta corriente:
@@ -25,22 +41,6 @@ De aqu\'i resulta evidente que esta corriente depende considerablemente de la po
 
 Otra diferencia notable entre la curva calculada y las demas est\'a en la ca\'ida de tensi\'on que se observa en la salida incluso antes de entrar en foldback. Los cambios peque\~nos que se observan para corrientes menores a 1.5A se pueden atribuir a que la impedancia de salida no es exactamente 0, y por lo tanto la regulaci\'on de l\'inea no es del todo perfecta.  Pero para corrientes superiores, se comienza a observar un descenso mayor en la tensi\'on. Esto se debe a que la protecci\'on no se activa para un valor concreto de corriente, como se modeliza, si no que $T_4$ pasa gradualmente de corte a modo activo.
 
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=0.8\textwidth]
-	{curvas_salida/e2_tp1_carac_salida_12V.png}
-	\caption{Curva de salida calculada, simulada y medida, con $V_O|_{REG}=12$V}
-	\label{fig:cs12}
-\end{figure}
-
-
-\begin{figure}[!htb]
-	\centering
-	\includegraphics[width=0.8\textwidth]
-	{curvas_salida/e2_tp1_carac_salida_15V.png}
-	\caption{Curva de salida calculada, simulada y medida, con $V_O|_{REG}=15$V}
-	\label{fig:cs15}
-\end{figure}
 
 
 \end{document}

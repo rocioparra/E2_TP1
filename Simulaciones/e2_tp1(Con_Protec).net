@@ -1,0 +1,35 @@
+* C:\Users\Rochi\Google Drive\2019 - 1C\Electrónica II\TP\E2_TP1\Simulaciones\e2_tp1(Con_Protec).asc
+Q1 in N004 N007 0 BC337-25
+Q2 in N007 N008 0 Qtip41c
+R1 out 0 {RL}
+R§PRESET out realim 38976
+R3 realim 0 47k
+D1 N004 N006 1N4148
+D2 0 N005 TDZ8_2B
+R4 in N005 560
+D3 in N001 1N4148
+D4 N001 N003 1N4148
+V1 in 0 20
+R6 N003 0 10k
+Q3 N004 N003 N002 0 BC557B
+XU1 N005 realim in 0 N006 LM339
+Q4 N004 N009 out 0 2N2222
+R7 N008 N009 1k5
+R8 N009 0 39k
+R9 N008 out 0.6
+R5 in P001 560
+R10 P001 N002 82
+.model D D
+.lib C:\Users\Rochi\Documents\LTspiceXVII\lib\cmp\standard.dio
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\Rochi\Documents\LTspiceXVII\lib\cmp\standard.bjt
+.lib LM339.5_1
+.lib BC547.lib
+.step dec param RL  1 1000 300
+.op
+* vo=15 -> preset=38976
+* vo=9 -> preset=4585
+* PRESET=R3*(VO/8.2 - 1)
+.backanno
+.end

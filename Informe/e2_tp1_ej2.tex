@@ -2,7 +2,97 @@
 
 \begin{document}
 
-\section{otra secci\'on}
+
+\section{Rendimiento}
+
+Un par\'ametro fundamental de una fuente de tensi\'on regulada es el rango de tensiones de entrada en el cual la salida se encuentra en regulaci\'on. Idealmente, con cualquier tensi\'on igual o supuerior a la de salida se podr\'ia obtener $V_{O\, REG}$, pero la necesidad de llevar a los transistores del circuito a un punto de trabajo apropiado hace que haya una diferencia de tensi\'on m\'inima entre la entrada y la salida. 
+
+Tomando como criterio que el circuito est\'a regulando correctamente si la tensi\'on de salida es un 99\% o m\'as de la que se tiene sin carga, se obtuvieron los datos de la tabla \ref{table:rendimiento}.
+
+\begin{table}[htb!]
+\centering
+\begin{tabular}{|c||c|c|}
+\hline
+$V_{O\,REG}$ (V) & $V_I - V_O$ simulada (V) & $V_I - V_O$ medida (V) \\ \hline\hline
+9                & 1.263                    & 1.37                   \\ \hline
+10               & 1.273                    & 1.37                   \\ \hline
+11               & 1.281                    & 1.5                    \\ \hline
+12               & 1.286                    & 1.18                   \\ \hline
+13               & 1.290                    & 1.29                   \\ \hline
+14               & 1.293                    & 1.26                   \\ \hline
+15               & 1.295                    & 1.13                   \\ \hline
+\end{tabular}
+\caption{Rendimiento medido y simulado para distintas tensiones de regulaci\'on}
+\label{table:rendimiento}
+\end{table}
+
+En promedio, pues, se obtuvo que:
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+	\Delta V_{MIN\,SIM} &= 1.28V \\ 
+	\Delta V_{MIN\,MED} &= 1.3V \\ 
+	\end{aligned}
+	\right.
+\end{equation}
+
+
+
+\section{Impedancia de salida}
+
+Una caracter\'istica de una fuente de tensi\'on regulada ideal es que posee impedancia de salida cero, lo cual resultar\'ia en regulaci\'on de carga ideal, es decir: la tensi\'on de salida es la misma para cualquier valor de $R_L$. Desde ya, en la pr\'actica esto es imposible de obtener, pero la realimentaci\'on negativa de este tipo de fuentes permite obtener un valor de $R_O$ lo suficientemente peque\~no como para que sea despreciable en la mayor\'ia de los casos. 
+
+Anal\'iticamente, el valor de $R_O$ se obtiene a partir de la impedancia de salida del circuito amplificador b\'asico $R_{OA}$ y la ganancia de lazo $|T|$:
+
+\begin{equation}
+	R_O = \frac{R_{OA}}{1+|T|}
+	\label{eq:rout}
+\end{equation}
+
+En la ecuaci\'on \ref{eq:rout} resulta muy claro por qu\'e la realimentaci\'on negativa mejora esta caracter\'istica del circuito: en lugar de ver directamente la impedancia de salida del circuito amplificador b\'asico, la carga ve a esta impedancia reducida $1+|T|$ veces.
+
+\todo[inline]{un poco de desarrollo matem\'atico sobre esto}
+
+Se obtiene anal\'iticamente entonces que:
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+	|T| &\simeq ... \\
+	R_{OA} &\simeq ...
+	\end{aligned}
+	\right.
+\end{equation}
+
+\todo[inline]{completar modT, Roa}
+
+Remiti\'endonos nuevamente a la ecuaci\'on \ref{eq:rout}, resulta entonces que:
+
+\begin{equation}
+	R_O \simeq 4\times 10^{-6}\Omega
+\end{equation}
+
+Para simular y medir este valor, se estudi\'o la regulaci\'on de carga del circuito. Si la impedancia de salida fuese cero, deber\'ia cumplirse que tanto para corriente 0 como para cualquier valor de $I_O$, la tensi\'on de salida es la misma. A medida que $R_O$ aumenta, m\'as cae la tensi\'on a medida que aumenta la corriente. Se decidi\'o pues calcular $R_O$ a partir de:
+
+\begin{equation}
+	R_O = \frac{V_O|_{I_O=0} - V_O|_{I_O=I_{O\,1}}}{I_{O\,1}}
+\end{equation} 
+
+Si bien, en principio, esta ecuaci\'on es v\'alida para cualquier par de valores de $\Delta V_O$ y $\Delta I_O$, se decidi\'o utilizar $I_{O\,1}$=1A, debido a que los valores de $\Delta V_O$ en regulaci\'on son muy peque\~nos, y por lo tanto dif\'iciles de medir con precisi\'on con el instrumental que se ten\'ia disponible, lo cual incurre en un gran error porcentual en la determinaci\'on del mismo, que se propaga proporcionalmente a $R_O$. A pesar de que esta forma se ignora el hecho de que la impedancia de salida cambia con la carga, dado que cambia la polarizaci\'on de todos los diodos y transistores del circuito, se consider\'o que se incurrir\'ia as\'i en menos error que tratando de medir las variaciones de unos pocos mV (o inferiores) que ocurren en valores similares de corriente.
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+$V_{O\,REG}$ (V) & $R_O$ simulada ($\Omega$) & $R_O$ medida ($\Omega$) \\ \hline\hline
+9                & $3 \times 10^{-6}$        & $6 \times 10^{-2}$      \\ \hline
+15               & $2 \times 10^{-6}$        & $2 \times 10^{-2}$      \\ \hline
+\end{tabular}
+\caption{Valores simulados y medidos para la impedancia de salida}
+\label{table:rout}
+\end{table}
+
 
 
 \end{document}
