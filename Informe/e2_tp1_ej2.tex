@@ -7,6 +7,41 @@
 
 Un par\'ametro fundamental de una fuente de tensi\'on regulada es el rango de tensiones de entrada en el cual la salida se encuentra en regulaci\'on. Idealmente, con cualquier tensi\'on igual o supuerior a la de salida se podr\'ia obtener $V_{O\, REG}$, pero la necesidad de llevar a los transistores del circuito a un punto de trabajo apropiado hace que haya una diferencia de tensi\'on m\'inima entre la entrada y la salida. 
 
+Partiendo desde la salida, la tensión en el nodo común a las resistencias $R_4$ y $R_7$ es igual a $V_o$. Despreciando la tensión que cae en la resistencia $R_4$, puesto que es muy pequeña, asumimos que en el colector del transistor T2 obtenemos la tensión $V_o$.
+Sabemos por la hoja de datos del fabricante, que para que el transistor T2 no entre en saturación es de $1 V$como máximo para las condiciones de nuestro circuito, por lo que vamos a asumir que el valor de $V_{ce}=1 V$; ahora, al igual que para T2, la hoja de datos del transistor T1 nos indica que  $V_{ce_{sat}}=600mV$ como valor máximo. 
+Ahora, planteando mallas entre los transistores del par darlington, vemos que:
+\begin{center}
+{\large{}$ V_{ce_{T1}}=V_{ce_{T2}}-V_{BE_{on}}$}{\large\par}
+\par\end{center}
+Como $V_{ce_{T1}}=0.6V$,$V_{BE_{on}}=0.7V$ despejando obtenemos que $V_{ce_{T2}}=1.4V$ , valor admisible dentro del rango del transistor T2.
+Finalmente, $V_{in}$ puede expresarse como:
+\begin{center}
+{\large{}$ V_{in}=V_{ce_{T2}}+V_{o}$}{\large\par}
+\par\end{center}
+
+siendo $V_{ce_{T2}}=1.4 V$.
+
+Cabe destacar que los fabricantes proporcionan una $V_{ce_{sat}}$ mínima, por ende, el valor final puede ser mas bajo. Si se tienen en cuenta los valores mínimos, $V_{ce_{T1}}=0.2V$ y $V_{ce_{T2}}=0.1V$, lo que hace que $ V_{in}=0.8V+V_{o}$.
+
+Por otro lado, hay que verificar tambi\'en que la fuente de corriente se polarice correctamente. Recorriendo la rama que une la entrada, los diodos de la fuente y $T_3$, y yendo desde la salida hasta el colector de $T_3$ (despreciando nuevamente la ca\'ida en $R_4$), se obtiene:
+\begin{equation}
+	\left\{
+	\begin{aligned}
+	V_{E_3} &= V_O + V_{BE_1} +  V_{BE_2}\\
+	V_{C_3} &= 	V_I - 2V_D +  V_{BE_3}
+	\end{aligned}
+	\right.
+	\Rightarrow V_{EC_3} = V_I - V_O + 2V_D+  V_{BE_1} +  V_{BE_2} -  V_{BE_3}
+\end{equation}
+
+
+Por lo tanto, si no queremos que $T_3$ sature, debe cumplirse que:
+\begin{equation}
+	  V_I - V_O > V_{EC_3 SAT} + 2V_D +  V_{BE_1} +  V_{BE_2} -  V_{BE_3}
+\end{equation}
+
+Si asumimos que todas las $V_{BE}$ y $V_D$ son 0.7V, tomando los 0.3V de la hoja de datos del BC557 como $V_{CE_3 SAT}$, se obtiene que $V_I - V_O > 2.4$V. Sin embargo, emp\'iricamente se verifica que todas estas tensiones son inferiores a 0.7V, y por lo tanto el circuito funciona correctamente para diferencias inferiores.
+
 Tomando como criterio que el circuito est\'a regulando correctamente si la tensi\'on de salida es un 99\% o m\'as de la que se tiene sin carga, se obtuvieron los datos de la tabla \ref{table:rendimiento}.
 
 \begin{table}[htb!]
