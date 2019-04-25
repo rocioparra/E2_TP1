@@ -24,10 +24,17 @@ Los requerimientos para el dise\~no son:
 
 Como la tensi\'on de salida no necesita llegar a 0V en regulaci\'on, se decidi\'o utilizar la configuraci\'on no inversora vista en clase (donde la tensi\'on de salida siempre es mayor a la de referencia).
 
+\begin{figure}[htb]
+	\centering
+	\includegraphics[width=0.8\textwidth]
+	{circuitos/circuito.png}
+	\caption{Dise\~no b\'asico de la fuente regulada de tensi\'on}
+	\label{fig:circ3}
+\end{figure}
 
 \section{Dise\~no de la fuente regulada de tensi\'on}
 
-El circuito b\'asico del que se parti\'o (como se observa en la figura ?? \todo{dibujo del circuito sin fuente ni protecci\'on}) obtiene la tensi\'on de referencia a partir de un diodo Zener, que es comparada mediante un opamp con un divisor resistivo de la tensi\'on de salida. Despreciando la corriente que entra al operacional, la salida se obtiene como:
+El circuito b\'asico del que se parti\'o (como se observa en la figura \ref{fig:circ3}) obtiene la tensi\'on de referencia a partir de un diodo Zener, que es comparada mediante un opamp con un divisor resistivo de la tensi\'on de salida. Despreciando la corriente que entra al operacional, la salida se obtiene como:
 
 \begin{equation}
 	V_{O} = \left( 1+\frac{R_A}{R_B} \right) \cdot V_Z
@@ -35,7 +42,7 @@ El circuito b\'asico del que se parti\'o (como se observa en la figura ?? \todo{
 
 De esta manera, cambiando el valor de $R_A$ se puede variar la tensi\'on de salida. 
 
-\todo[inline]{toda esta secci\'on falta estructurarla bien}
+La realimentaci\'on se completa con el par Darlington y la fuente de corriente. El par funciona como transistor de paso, aportando la diferencia de tensi\'on necesaria para que $V_{O}$ sea la de regulaci\'on. La realimentaci\'on del circuito hace que el opamp consuma la corriente suficiente como para que a la base de $T_1$ llegue la justa y necesaria para que la salida se mantenga en regulaci\'on. El diodo $D_1$ impide que el opamp entregue corriente, con lo cual la corriente m\'axima de salida se tiene cuando la totalidad de la entregada por la fuente va al transistor.
 
 \subsection{Generador y detector}
 
@@ -48,15 +55,11 @@ En cuanto a $R_1$, la presencia de la misma tiene el \'unico prop\'osito de llev
 
 Por lo tanto, sus m\'inimos y m\'aximos coincidir\'an con los de la tensi\'on de entrada. Se consider\'o que la tensi\'on m\'inima de entrada es $V_{I\, MIN} = V_{O\, MIN} + 1.5\mathrm{V} = 10.5\mathrm{V}$, y la m\'axima,  $V_{I\, MAX} = V_{O\, MAX} + 5\mathrm{V} = 20\mathrm{V}$ (sobredimensionando en ambos casos). Se eligi\'o entonces $R_1=560\Omega$, con lo cual se obtiene $I_{Z\, MIN} = 4.1$mA e $I_{Z\, MAX} = 21.1$mA.
 
-Dicha corriente, as\'i como la corriente de salida, es proporcionada por el par Darlington que conecta la entrada con la salida. Este par funciona como transistor de paso, aportando la diferencia de tensi\'on necesaria para que $V_{O}$ sea la de regulaci\'on. La realimentaci\'on del circuito hace que el opamp consuma la corriente suficiente como para que a la base de $T_1$ llegue la justa y necesaria para que la salida se mantenga en regulaci\'on. El diodo $D_1$ impide que el opamp entregue corriente, con lo cual la corriente m\'axima de salida se tiene cuando la totalidad de la entregada por la fuente va al transistor. 
-
-Se decidi\'o utilizar dos transistores para el Darlington, en lugar de un integrado, para tener m\'as control sobre el dise\~no del mismo. Por ejemplo, la mayor\'ia de los pares Darlington del pa\~nol de la universidad poseen resistencias entre la base y el emisor de $T_2$, y lo mismo para $T_1$. Sin embargo, con los transistores elegidos (como se ver\'a a continuaci\'on), estas resistencias no ayudan a llevar los $\beta$ a un punto mejor, y por lo tanto se decidi\'o obviarlas.
-
-
-
 
 \subsection{Circuito de control: par Darlington}
 
+Se decidi\'o utilizar dos transistores para el Darlington, en lugar de un integrado, para tener m\'as control sobre el dise\~no del mismo. Por ejemplo, la mayor\'ia de los pares Darlington del pa\~nol de la universidad poseen resistencias entre la base y el emisor de $T_2$, y lo mismo para $T_1$. Sin embargo, con los transistores elegidos (como se ver\'a a continuaci\'on), estas resistencias no ayudan a llevar los $\beta$ a un punto mejor, y por lo tanto se decidi\'o obviarlas.
+ 
 A la hora de elegir $T_1$ y $T_2$, la principal consideraci\'on que se tuvo es que pudieran soportar holgadamente la corriente m\'axima. En segundo lugar, se tuvo en cuenta los rangos de $\beta$ aportados por el fabricante, buscando el mayor m\'inimo y la menor dispersi\'on posible. Por \'ultimo, se consider\'o tambi\'en el precio de cada componente listado en el pa\~nol de la universidad.
 
 
@@ -110,7 +113,15 @@ Este operacional debe contar con la posibilidad de ser alimentado con $0 - V_{CC
 
 \subsection{Pre-regulador: fuente de corriente}
 
-La fuente de corriente que se utiliz\'o se observa en la figura ???\todo{esquema de la fuente}. El funcionamiento de la misma es el siguiente: la resistencia $R_5$ permite que se polaricen los diodos en directa, generando en la base de $T_3$ una tensi\'on de $V_{B_3}=V_{I} - 2 V_D \simeq V_{in} - 1.4\mathrm{V}$. Luego, cuando el transistor est\'e correctamente polarizado (lo cual depender\'a de la diferencia entre $V_I$ y $V_O$), en la resistencia $R_6$ caer\'a una tensi\'on de $V_{R_6} = V_I - V_{E_3} = V_I - (V_{B_3} + V_{BE_3}) = V_I - (V_I - 2V_D + V_{BE_3}) = V_D$ si consideramos $V_{BE_3} = V_D$.
+La fuente de corriente que se utiliz\'o se observa en la figura \ref{fig:fuente}. El funcionamiento de la misma es el siguiente: la resistencia $R_5$ permite que se polaricen los diodos en directa, generando en la base de $T_3$ una tensi\'on de $V_{B_3}=V_{I} - 2 V_D \simeq V_{in} - 1.4\mathrm{V}$. Luego, cuando el transistor est\'e correctamente polarizado (lo cual depender\'a de la diferencia entre $V_I$ y $V_O$), en la resistencia $R_6$ caer\'a una tensi\'on de $V_{R_6} = V_I - V_{E_3} = V_I - (V_{B_3} + V_{BE_3}) = V_I - (V_I - 2V_D + V_{BE_3}) = V_D$ si consideramos $V_{BE_3} = V_D$.
+
+\begin{figure}[htb!]
+	\centering
+	\includegraphics[scale=0.5]
+	{circuitos/fuente.png}
+	\caption{Fuente de corriente utilizada en el regulador de tensi\'on}
+	\label{fig:fuente}
+\end{figure}
 
 Por lo tanto, como la corriente de salida es aproximadamente igual a la de $R_6$ (despreciando $I_{B_3}$), se obtiene:
 \begin{equation}
@@ -134,13 +145,25 @@ Por lo tanto, se eligieron los componentes:
 	\item $T_3$ = BC557, un transistor PNP de uso general, que era el m\'as barato (la mitad que el siguiente m\'as barato) y con mayor disponibilidad del pa\~nol de la universidad, y con $I_C = 100$mA y $V_{CE}=45$V es m\'as que suficiente para este uso.
 \end{itemize}
 
-% \subsection{Protecci\'on frente a cortocircuito}
-
-
 
 
 
 \subsection{Compensaci\'on de ganancia}
+
+Si bien el comportamiento del circuito que m\'as nos interesa es en continua, las m\'ultiples capacidades de juntura y el lazo de realimentaci\'on provocan que la respuesta en frecuencia de este circuito no sea constante. Por lo tanto, surge la necesidad de garantizar que para ninguna frecuencia se cumpla el criterio de Barkhausen, es decir:
+
+\[
+\left\{
+\begin{aligned}
+|T(f)| &= 1 \\
+\phase{T(f)} &= 180^\circ
+\end{aligned}
+\right.
+\]
+
+Una forma de garantizar que esto no ocurra es forzar la existencia de un polo en bajas frecuencias, de forma tal que se llegue a 0dB para frecuencias bajas y controlando que ese salto no sea en simult\'aneo con una fase cercana a $180^\circ$ para que el sistema no oscile
+
+Se procur\'o lograr esto insertando un capacitor entre la salida del amplificador de error y la realimentaci\'on, de forma tal que en altas frecuencias (cuando el capacitor es un cable) la se\~nal se vea atenuada. Al simular con un capacitor de 10nF, se obtuvieron los m\'argenes observados en la tabla \
 
 
 \end{document}
